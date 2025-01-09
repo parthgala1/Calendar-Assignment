@@ -5,7 +5,7 @@ import ExportList from "./components/ExportList";
 
 function App() {
   const [events, setEvents] = useState(() => {
-    const storedEvents = localStorage.getItem("events");
+    const storedEvents = localStorage.getItem("calendarEvents");
     return storedEvents ? JSON.parse(storedEvents) : [];
   });
   return (
