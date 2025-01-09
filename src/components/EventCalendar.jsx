@@ -39,16 +39,6 @@ const EventCalendar = ({ updateEvents }) => {
     }
   }, []);
 
-  useEffect(() => {
-    console.log("Saving events to localStorage:", events);
-    localStorage.setItem("calendarEvents", JSON.stringify(events));
-  }, [events]);
-
-  useEffect(() => {
-    const savedEvents = localStorage.getItem("calendarEvents");
-    console.log("Loaded events from localStorage:", savedEvents);
-  }, []);
-
   // Save events to localStorage whenever they change
   useEffect(() => {
     localStorage.setItem("calendarEvents", JSON.stringify(events));
