@@ -3,6 +3,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Plus, Edit } from "lucide-react";
@@ -24,19 +25,24 @@ const EventListModal = ({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>
-            Events for {selectedDate?.toLocaleDateString()}
+            Events for{" "}
+            {selectedDate?.toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-4 mt-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-medium">
               {getFilteredEvents(selectedDate?.toISOString().split("T")[0])
-                .length || 0}{" "}
-              Events
+                .length || "No "}{" "}
+              {getFilteredEvents(selectedDate?.toISOString().split("T")[0])
+                .length === 1
+                ? "Event"
+                : "Events"}
             </h3>
-            <Button onClick={handleAddNewEvent}>
-              <Plus className="h-4 w-4 mr-2" /> Add Event
-            </Button>
           </div>
           <div className="space-y-2">
             {getFilteredEvents(selectedDate?.toISOString().split("T")[0]).map(
@@ -68,6 +74,11 @@ const EventListModal = ({
             )}
           </div>
         </div>
+        <DialogFooter>
+          <Button onClick={handleAddNewEvent}>
+            <Plus className="h-4 w-4 mr-2" /> Add Event
+          </Button>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

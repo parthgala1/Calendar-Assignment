@@ -4,7 +4,10 @@ import EventCalendar from "./components/EventCalendar";
 import ExportList from "./components/ExportList";
 
 function App() {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState(() => {
+    const storedEvents = localStorage.getItem("events");
+    return storedEvents ? JSON.parse(storedEvents) : [];
+  });
   return (
     <div className="flex flex-col justify-center items-center">
       <h1 className="text-4xl mb-3 font-serif">Event Calendar</h1>
